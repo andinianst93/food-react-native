@@ -1,7 +1,8 @@
 import { useEffect, useState } from "react";
-import { StyleSheet, Text, View, Button } from "react-native";
+import { StyleSheet, View } from "react-native";
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
+import { createDrawerNavigator } from "@react-navigation/drawer";
 
 import { StatusBar } from "expo-status-bar";
 import * as SplashScreen from "expo-splash-screen";
@@ -22,8 +23,39 @@ import CategoriesScreen from "./screens/CategoriesScreen";
 import MealsOverviewScreen from "./screens/MealsOverviewScreen";
 import colors from "./lib/colors";
 import MealDetailScreen from "./screens/MealDetailScreen";
+import FavScreen from "./screens/FavScreen";
 
 const Stack = createNativeStackNavigator();
+const Drawer = createDrawerNavigator();
+
+function DrawerNavigator() {
+  return (
+    <Drawer.Navigator
+      initialRouteName="Categories"
+      screenOptions={{
+        headerStyle: {
+          backgroundColor: colors.primary[50],
+        },
+        headerTintColor: colors.background.card,
+        headerTitleStyle: {
+          fontFamily: "Inter_700Bold",
+        },
+        sceneContainerStyle: {
+          backgroundColor: colors.background.card,
+        },
+      }}
+    >
+      <Drawer.Screen
+        name="Categories"
+        component={CategoriesScreen}
+        options={{
+          title: "All Categories",
+        }}
+      />
+      <Drawer.Screen name="Favorites" component={FavScreen} />
+    </Drawer.Navigator>
+  );
+}
 
 SplashScreen.preventAutoHideAsync();
 
@@ -76,10 +108,10 @@ export default function App() {
           }}
         >
           <Stack.Screen
-            name="Categories"
-            component={CategoriesScreen}
+            name="DrawerScreen"
+            component={DrawerNavigator}
             options={{
-              title: "Meal Categories",
+              headerShown: false,
             }}
           />
           <Stack.Screen name="Meal" component={MealsOverviewScreen} />
