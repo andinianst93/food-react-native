@@ -3,6 +3,7 @@ import { StyleSheet, View } from "react-native";
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { createDrawerNavigator } from "@react-navigation/drawer";
+import { Ionicons } from "@expo/vector-icons";
 
 import { StatusBar } from "expo-status-bar";
 import * as SplashScreen from "expo-splash-screen";
@@ -43,6 +44,13 @@ function DrawerNavigator() {
         sceneContainerStyle: {
           backgroundColor: colors.background.card,
         },
+        drawerContentStyle: {
+          backgroundColor: colors.primary[50],
+        },
+        drawerActiveBackgroundColor: colors.background.card,
+        drawerInactiveBackgroundColor: colors.primary[50],
+        drawerActiveTintColor: colors.primary[50],
+        drawerInactiveTintColor: colors.background.card,
       }}
     >
       <Drawer.Screen
@@ -50,9 +58,20 @@ function DrawerNavigator() {
         component={CategoriesScreen}
         options={{
           title: "All Categories",
+          drawerIcon: ({ color, size }) => (
+            <Ionicons name="list" size={size} color={color} />
+          ),
         }}
       />
-      <Drawer.Screen name="Favorites" component={FavScreen} />
+      <Drawer.Screen
+        name="Favorites"
+        component={FavScreen}
+        options={{
+          drawerIcon: ({ color, size }) => (
+            <Ionicons name="star" size={size} color={color} />
+          ),
+        }}
+      />
     </Drawer.Navigator>
   );
 }
