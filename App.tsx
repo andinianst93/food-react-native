@@ -25,6 +25,11 @@ import MealsOverviewScreen from "./screens/MealsOverviewScreen";
 import colors from "./lib/colors";
 import MealDetailScreen from "./screens/MealDetailScreen";
 import FavScreen from "./screens/FavScreen";
+// import FavoritesContextProvider, {
+//   FavoritesContext,
+// } from "./store/context/favorite-context";
+import { Provider } from "react-redux";
+import { store } from "./store/redux/store";
 
 const Stack = createNativeStackNavigator();
 const Drawer = createDrawerNavigator();
@@ -110,33 +115,37 @@ export default function App() {
 
   return (
     <View style={styles.container}>
-      <NavigationContainer>
-        <Stack.Navigator
-          initialRouteName="Categories"
-          screenOptions={{
-            headerStyle: {
-              backgroundColor: colors.primary[50],
-            },
-            headerTintColor: colors.background.card,
-            headerTitleStyle: {
-              fontFamily: "Inter_700Bold",
-            },
-            contentStyle: {
-              backgroundColor: colors.background.main,
-            },
-          }}
-        >
-          <Stack.Screen
-            name="DrawerScreen"
-            component={DrawerNavigator}
-            options={{
-              headerShown: false,
+      {/* <FavoritesContextProvider> */}
+      <Provider store={store}>
+        <NavigationContainer>
+          <Stack.Navigator
+            initialRouteName="Categories"
+            screenOptions={{
+              headerStyle: {
+                backgroundColor: colors.primary[50],
+              },
+              headerTintColor: colors.background.card,
+              headerTitleStyle: {
+                fontFamily: "Inter_700Bold",
+              },
+              contentStyle: {
+                backgroundColor: colors.background.main,
+              },
             }}
-          />
-          <Stack.Screen name="Meal" component={MealsOverviewScreen} />
-          <Stack.Screen name="MealDetail" component={MealDetailScreen} />
-        </Stack.Navigator>
-      </NavigationContainer>
+          >
+            <Stack.Screen
+              name="DrawerScreen"
+              component={DrawerNavigator}
+              options={{
+                headerShown: false,
+              }}
+            />
+            <Stack.Screen name="Meal" component={MealsOverviewScreen} />
+            <Stack.Screen name="MealDetail" component={MealDetailScreen} />
+          </Stack.Navigator>
+        </NavigationContainer>
+      </Provider>
+      {/* </FavoritesContextProvider> */}
       <StatusBar style="light" />
     </View>
   );
