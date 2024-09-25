@@ -1,10 +1,10 @@
 {
   "expo": {
-    "name": "food-react-native",
-    "slug": "food-react-native",
+    "name": "My Recipe App",
+    "slug": "my-recipe-app",
     "version": "1.0.0",
     "orientation": "portrait",
-    "icon": "./assets/icon.png",
+    "icon": "./assets/play_store_512.png",
     "userInterfaceStyle": "light",
     "backgroundColor": "#171717",
     "splash": {
@@ -17,15 +17,21 @@
     },
     "android": {
       "adaptiveIcon": {
-        "foregroundImage": "./assets/adaptive-icon.png",
+        "foregroundImage": "./assets/play_store_512.png",
         "backgroundColor": "#0a0a0a"
-      }
+      },
+      "package": "com.andinidev93.myrecipeappdev"
     },
     "web": {
       "favicon": "./assets/favicon.png"
     },
     "plugins": [
       "expo-font"
-    ]
+    ],
+    "extra": {
+      "eas": {
+        "projectId": "2afd1d32-3731-4e30-bac4-7d436b007a3f"
+      }
+    }
   }
 }
